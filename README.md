@@ -1,13 +1,13 @@
 ---
 eip:
 title: Standards and Best Practices for implementing Sign-in with Ethereum.
-author:
+author: [Anudit Nagar](https://github.com/anudit)
 discussions-to:
 status:
-type:
-category:
+type: Standards Track
+category: ERC
 created:
-requires:
+requires: 137, 634, 1193, 2304
 ---
 
 ## Simple Summary
@@ -25,9 +25,11 @@ We introduce a standard for implementing Sign-in in with Ethereum to authenticat
 
 ## Specification
 
+### Overview
+
 To break it down the login flow,
 
-1. The User chooses Sign-In with Ethereum and chooses a Wallet.
+1. The User clicks Sign-In with Ethereum and chooses a Wallet.
 2. The User Signs a `Challenge Message` from the Wallet.
 3. The Application verfies the User indeed owns the account and generates a JWT token authorizing the user.
 
@@ -35,7 +37,17 @@ To break it down the login flow,
 
 OAuth (Open Authorization) is a standard that apps can use to provide client applications with "Authenticated Access". OAuth works over HTTPS and authorizes applications with access tokens rather than credentials
 
-### Implementation
+### Previous Literature
+
+[EIP-1078](https://eips.ethereum.org/EIPS/eip-1078)
+[EIP-2525](https://eips.ethereum.org/EIPS/eip-2525)
+
+### Existing Implementations
+
+ - [node-eauth-server](https://github.com/pelith/node-eauth-server)
+ - [EthPress – Web3 Login](https://wordpress.org/plugins/ethpress/#developers)
+
+### Implementation Specifications
 
 The User Sign-In flow starts by showing users a "Sign-in with Ethereum" button. The UI for this should be similar to the standard Web2 Social login buttons,
 
@@ -119,13 +131,13 @@ const addresses = ['0xd8da6bf26964af9d7eed9e03e53415d37aa96045', '0x983110309620
 const ensAddresses = resolver.getNames(addresses);
 ```
 
+Once the user is signed-in and the cookie is set. On return visits the cookie should be first revalidated, and if valid auto sign-in the user.
+
 ## Backwards Compatitbility
 
 Wallet providers like Torus support Sign-in via Web2 social providers linking them to an Ethereum Address. While this may be custodial, this enables new users to use Decentrliazed Identities without having to install any additional wallet extensions or applications.
 
-## Security Considerations
-
-
+This implementation can be used in parallel with existing social login providers on any website building the providers
 
 ## Copyright
-Copyright and related rights waived via CC0.
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
