@@ -19,7 +19,7 @@ We introduce a standard for implementing Sign-in in with Ethereum to authenticat
 
 ## Motivation
 
-1. An Ethereum based Web3 Login to the Web2 world enabling any applicaion to have support for Authentication via Decentralized Identities.
+1. An Ethereum based Web3 Login to the Web2 world enabling any application to have support for Authentication via Decentralized Identities.
 2. A Single Sign-On approach enabling users to have a single authentication method that works across all sites.
 3. ENS enables users to register a Web3 username that wraps multiple identities across web2 and web3, can point to a decentralized website all without touching a single centralized service and then hold custody of it themselves in their Ethereum account.
 
@@ -31,9 +31,9 @@ To break it down the login flow,
 
 1. The User clicks Sign-In with Ethereum and chooses a Wallet.
 2. The User Signs a `Challenge Message` from the Wallet.
-3. The Application verfies the User indeed owns the account and generates a JWT token authorizing the user.
+3. The Application verifies the User indeed owns the account and generates a JWT token authorizing the user.
 
-### Defintitions
+### Definitions
 
 OAuth (Open Authorization) is a standard that apps can use to provide client applications with "Authenticated Access". OAuth works over HTTPS and authorizes applications with access tokens rather than credentials
 
@@ -56,7 +56,7 @@ The User Sign-In flow starts by showing users a "Sign-in with Ethereum" button. 
 
 Next, the user chooses the wallet they want to use. Wallet bundlers like Web3Modal, Onboard.js can be used to support multiple Web3 Wallet Providers out-of-the-box.
 
-Next, the users signs the `Challenge Message`. This part can be intimidating to users who do not have an understanding of what signing a message means and is also a crucial security step that proves the user's ownership of the account. Hence, this message shoulud be descriptive of it's purpose and the access the application.user gets after signing.
+Next, the users sign the `Challenge Message`. This part can be intimidating to users who do not have an understanding of what signing a message means and is also a crucial security step that proves the user's ownership of the account. Hence, this message should be descriptive of its purpose and the access the application.user gets after signing.
 For example, "Sign this message to prove the ownership of the address <eth-address> to <application-name>. Timestamp:<timestamp> Validity:<validity>".
 
 Here a `timestamp` is used to make sure that a past signed message payload cannot be reused again, this can further be expanded to a nonce stored on the server that can be revoked by the user and forces re-authentication of all sessions.
@@ -64,7 +64,7 @@ Here a `timestamp` is used to make sure that a past signed message payload canno
 `Validity` makes sure the user is aware of how long the session token is authorized for.
 
 
-Server-sided validation can implemented by 2 primary functions.
+Server-sided validation can be implemented by 2 primary functions.
 
 First to Recover an Address from a Signed Message Data (signature), Validate the address and issue a Session Token (JWT). E.g.,
 ```js
@@ -133,7 +133,7 @@ const ensAddresses = resolver.getNames(addresses);
 
 Once the user is signed-in and the cookie is set. On return visits the cookie should be first revalidated, and if valid auto sign-in the user.
 
-## Backwards Compatitbility
+## Backwards Compatibility
 
 Wallet providers like Torus support Sign-in via Web2 social providers linking them to an Ethereum Address. While this may be custodial, this enables new users to use Decentrliazed Identities without having to install any additional wallet extensions or applications.
 
