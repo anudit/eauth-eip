@@ -29,7 +29,8 @@ We introduce a standard for implementing Sign-in in with Ethereum to authenticat
 
 To break it down the login flow,
 
-1. The User clicks Sign-In with Ethereum and chooses a Wallet.
+1. The User clicks Sign-In with Ethereum and chooses a Wallet to connect.
+2. The User connects the wallet by completing the wallet authentication process (automatically connects if already authenticated).
 2. The User Signs a `Challenge Message` from the Wallet.
 3. The Application verifies the User indeed owns the account and generates a JWT token authorizing the user.
 
@@ -109,7 +110,7 @@ import { ethers } from "ethers";
 let provider = new ethers.providers.InfuraProvider("mainnet");
 let ensAddress = await provider.lookupAddress(address);
 ```
-or directly resolve mutiple ENS Addresses on chain using,
+or directly resolve mutiple ENS Addresses on chain using the below method below (It is faster to get the data in 1 call to the contract passing multiple addresses as a parameter, than sending multiple calls in parallel for resolution),
 ```js
 let provider = new ethers.providers.InfuraProvider("mainnet");
 
@@ -131,13 +132,19 @@ const addresses = ['0xd8da6bf26964af9d7eed9e03e53415d37aa96045', '0x983110309620
 const ensAddresses = resolver.getNames(addresses);
 ```
 
+This can be further expanded by using the avatar text record as a user/profile image which you can get from the ENS Name's record. Other profile information like Twitter Handle, Github Handle etc can be shown appropriately too.
+
+This can be shown to the user as follows,
+
+![User Pill](./images/userpill.png "User Pill")
+
 Once the user is signed-in and the cookie is set. On return visits the cookie should be first revalidated, and if valid auto sign-in the user.
 
 ## Backwards Compatibility
 
 Wallet providers like Torus support Sign-in via Web2 social providers linking them to an Ethereum Address. While this may be custodial, this enables new users to use Decentrliazed Identities without having to install any additional wallet extensions or applications.
 
-This implementation can be used in parallel with existing social login providers on any website building the providers
+This implementation can be used in parallel with existing social login providers on any website.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
